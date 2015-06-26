@@ -1,0 +1,75 @@
+model {
+##############################################################################
+# 1. Define the priors for the parameters
+##############################################################################
+	
+	# Initial population size
+	nym1 ~ dnorm(ym1, 0.0000024)T(0,) #1/3 of starting total pop for phillips co
+	Nym[1] <- round(nym1)
+	nyf1 ~ dnorm(yf1, 0.0000024)T(0,) # Nym*1.6 with ratio of 1.6 females to males
+	Nyf[1] <- round(nyf1)
+	nam1 ~ dnorm(am1, 0.0000024)T(0,) #2/3 of starting total pop estimated for phillips co
+	Nam[1] <- round(nam1)
+	naf1 ~ dnorm(af1, 0.0000024)T(0,) # Nam*1.6 with ratio of 1.6 females to males
+	Naf[1] <- round(naf1)
+	
+	Ntotf[1] <- Nyf[1]+Naf[1]
+	Ntotm[1] <- Nym[1]+Nam[1]
+	Ntot[1] <-Ntotf[1]+Ntotm[1]
+	
+	
+	# Survival and fecundity values these informative priors come from R. Taylor 
+	# et al. (2012) supermeans and variances + some male VRs I found in recent dissertations
+	for (k in 1:nyear) {
+		Iy[k] ~ dnorm(0.89,43.29)T(0,1)
+		Ia[k] ~ dnorm(0.96,97.09)T(0,1)
+		Ca[k] ~ dnorm(4.1,64.94)T(0,10)
+		Cy[k] ~ dnorm(3.78,50)T(0,10)
+		Sn[k] ~ dnorm(0.44,36.5)T(0,1)
+		HCH[k] ~ dnorm(0.92,588.24)T(0,1)
+		Sc[k]~ dnorm(0.41,54.95)T(0,1)
+		Sj[k]~dnorm(0.75,119.05)T(0,1)
+		Syf[k]~dnorm(0.65,70.92)T(0,1)
+		Saf[k]~dnorm(0.58,322.58)T(0,1)
+		Sym[k]~dnorm(0.59,70.92)T(0,1)
+		Sam[k]~dnorm(0.56,51.51)T(0,1)
+	}
+		
+#############################################################################
+#2. Derived parameters
+#############################################################################
+
+	for (k in 1:(nyear - 1)) {
+		lambda[k] <- (Ntot[k+1] + 1) / (Ntot[k] + 1)
+	}
+					
+#############################################################################
+#3. Likelihood of datasets
+#############################################################################
+				
+	# Process model for all life stages (matrix model)
+	for (k in 2:nyear) {
+		Nyf[k] ~ dpois((Naf[k-1]*Ia[k-1]*Ca[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1])+
+					(Nyf[k-1]*Iy[k-1]*Cy[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1]))
+		Nym[k] ~ dpois((Naf[k-1]*Ia[k-1]*Ca[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1])+
+					(Nyf[k-1]*Iy[k-1]*Cy[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1]))
+		Nafy[k] ~ dbin(Syf[k-1], Nyf[k-1])
+		Nafa[k] ~ dbin(Saf[k-1], Naf[k-1])
+		Naf[k] <- Nafy[k]+Nafa[k]
+		Namy[k] ~ dbin(Sym[k-1], Nym[k-1])
+		Nama[k] ~ dbin(Sam[k-1], Nam[k-1])
+		Nam[k] <- Namy[k]+Nama[k]
+		
+		Ntotf[k] <- Nyf[k]+Naf[k]
+		Ntotm[k] <- Nym[k]+Nam[k]
+		Ntot[k] <- Ntotf[k]+Ntotm[k]
+	}
+	
+	# Observation model for the male count data (linking counts estimated from the N-mix to the matrix)
+	
+	for (k in 1:nyear){
+		counts[k] ~ dnorm(Ntotm[k], nse[k])
+	}
+
+
+}			

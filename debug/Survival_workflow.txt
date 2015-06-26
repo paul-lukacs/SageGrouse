@@ -1,0 +1,38 @@
+		#  Debugging script for survival data and analyses
+		#  Josh Nowak
+		#  03/2015
+#################################################################################
+		#  Packages
+		require(dplyr)
+		require(RCurl)
+#################################################################################
+		#  Source functions and create shiny input object
+		setwd("C:/PopR_Master_dev")
+		source("C:/PopR_Master_dev/custom/api_funs.R")
+		source("C:/PopR_Master_dev/custom/game_lookup.R")
+		source("C:/PopR_Master_dev/custom/dau_lookup.R")
+		source("C:/PopR_Master_dev/custom/surv_funs.R")
+		#  Shiny input
+		input <- list()
+		input$critter <- "Mule Deer"
+		input$dau <- "Boise River"
+		input$surv_critter <- "Mule Deer"
+		input$surv_age <- "Fawn"
+		input$surv_dau <- "Bannock"
+		input$surv_year <- 2009
+		input$surv_season <- "Annual"
+		input$surv_niter <- 1000
+		input$surv_burnin <- 500
+		input$surv_thin <- 1
+#################################################################################
+		#  Call functions in order they occur in shiny
+		#  Connect to db 
+		rawd <- api_connect("survival", input$surv_critter, input$surv_dau, 
+							FALSE)
+		
+		#  Subset data to ageclass, year
+		tmp <- get_survd(rawd, input)
+		head(tmp$out)
+		
+		#  Call survival models
+		out <- surv_wrapper(tmp, input, F)
