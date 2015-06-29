@@ -20,7 +20,7 @@ model {
 	
 	# Survival and fecundity values these informative priors come from R. Taylor 
 	# et al. (2012) supermeans and variances + some male VRs I found in recent dissertations
-	for (k in 1:nyear) {
+	for (k in 1:nyr) {
 		Iy[k] ~ dnorm(0.89,43.29)T(0,1)
 		Ia[k] ~ dnorm(0.96,97.09)T(0,1)
 		Ca[k] ~ dnorm(4.1,64.94)T(0,10)
@@ -39,7 +39,7 @@ model {
 #2. Derived parameters
 #############################################################################
 
-	for (k in 1:(nyear - 1)) {
+	for (k in 1:(nyr - 1)) {
 		lambda[k] <- (Ntot[k+1] + 1) / (Ntot[k] + 1)
 	}
 					
@@ -48,7 +48,7 @@ model {
 #############################################################################
 				
 	# Process model for all life stages (matrix model)
-	for (k in 2:nyear) {
+	for (k in 2:nyr) {
 		Nyf[k] ~ dpois((Naf[k-1]*Ia[k-1]*Ca[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1])+
 					(Nyf[k-1]*Iy[k-1]*Cy[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1]))
 		Nym[k] ~ dpois((Naf[k-1]*Ia[k-1]*Ca[k-1]*Sn[k-1]*HCH[k-1]*Sc[k-1]*Sj[k-1])+
