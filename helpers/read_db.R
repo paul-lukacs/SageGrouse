@@ -10,7 +10,7 @@
   			return()
 
   		#  Read data from database
-		setwd( "C:/Users/paul.lukacs/Documents/GitHub/SageGrouse")
+#		setwd( "C:/Users/paul.lukacs/Documents/GitHub/SageGrouse")
   		load(file.path("data", input$dbname))
   		#  Subset and order
   		md <- sg_data %>%

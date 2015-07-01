@@ -131,7 +131,11 @@
 							"Constant" = "cfS",
 							"Time Varying" = "tfS")
 			#  Male survival, IDFG does not have male survival data
-			ms <- "cmS"
+			# ms <- "cmS"
+			# for grouse make male surival model = female survival model
+			ms <- switch(input$adultSmod,
+							"Constant" = "cmS",
+							"Time Varying" = "tmS")
 			#  Process error, only models with process error currently 
 			#   implemented
 			pe <- "pe"

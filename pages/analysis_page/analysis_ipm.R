@@ -79,7 +79,7 @@ fixedPage(
           column(4,
             tags$div(title = "Choose how adult survival varies or hold it constant",
               select2Input("adultSmod", "Adult Survival",
-                           choices = list("Constant"),
+                           choices = list("Constant", "Time Varying"),
                            type = "select")
             )
           )
