@@ -96,13 +96,15 @@
 			#  Read data from database
 			md <- read_db(input)
 			
+			
+			
 			#  Add future harvest data to md
 			future <- input$year[2] - max(md$Year)
 			if(future > 0){
 				tmp <- md[1:future,]
 				tmp[] <- NA
-				tmp$MaleHarvest <- rep(input$mharv, future)
-				tmp$FemaleHarvest <- rep(input$fharv, future)
+				tmp$MaleHarvest <- 0  #rep(input$mharv, future)
+				tmp$FemaleHarvest <- 0  #rep(input$fharv, future)
 				md <- data.frame(rbind(md, tmp))
 			}
 			
@@ -153,8 +155,11 @@
 			#  character string used by JAGS
 						
 			#  For now everything is the same, so hard code
-			out <- c("R", "jS", "fS", "mS", "Ny", "Nf", "Nm", "mf", "yf", 
-						"lambda", "geoLambda", "Ntot")
+			#out <- c("R", "jS", "fS", "mS", "Ny", "Nf", "Nm", "mf", "yf", 
+			#			"lambda", "geoLambda", "Ntot")
+			# so much for hard coding - welcome to sage-grouse
+			out <- c( "jS", "fS", "mS", "Ntotf", "Ntotm",
+						"lambda", "Ntot")
 			
 		return(out)	
 		}
@@ -249,7 +254,7 @@
 					out$iter <- ipmiter
 					out$thin <- input$ipmthin
 				}
-  			setProgress(1, message = "Finished")  	
+			setProgress(1, message = "Finished")  	
 			})
 		return(out)	
 		}

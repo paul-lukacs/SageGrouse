@@ -118,7 +118,7 @@
           ipmrun$ipm <- hold
         }else{
           showshinyalert(session, "ipmrunalert", 
-            paste("Model run", input$fitgo, "failed!"),
+            paste("Model run", input$fitgo, "failed!\n", hold),
             styleclass = "danger")
         }
       })
