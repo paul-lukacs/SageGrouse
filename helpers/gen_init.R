@@ -46,13 +46,31 @@
 
 		#  Setup for process error models and deterministic models
 		if(grepl("pe", model_name)){
-			out <- list("Nf" = Nf, 
-						"Nm" = Nm, 
-						"Ny" = Ny, 
-						"mufS" = qlogis(fS), 
-						"muR" = R,
-						"mujS" = qlogis(jS), 
-						"mumS" = qlogis(mS))
+			#out <- list("Nf" = Nf, 
+			#			"Nm" = Nm, 
+			#			"Ny" = Ny, 
+			#			"mufS" = qlogis(fS), 
+			#			"muR" = R,
+			#			"mujS" = qlogis(jS), 
+			#			"mumS" = qlogis(mS))
+			Iy <- rep(0.89, nyear)
+			Ia <- rep(0.96, nyear)
+			Ca <- rep(4.1, nyear)
+			Cy <- rep(3.78,nyear)
+			Sn <- rep(0.44,nyear)
+			HCH <- rep(0.92,nyear)
+			Sc<- rep(0.41,nyear)
+			Sj<- rep(0.75,nyear)
+			Syf<- rep(0.65,nyear)
+			Saf<- rep(0.58,nyear)
+			Sym<- rep(0.59,nyear)
+			Sam<- rep(0.56,nyear)
+			ym1 <- x$counts[1]*(1/3)
+			yf1 <- ym1*1.6
+			am1 <- x$counts[1]*(2/3)
+			af1 <- am1*1.6
+		
+			out <- list(Iy=Iy,Ia=Ia,Ca=Ca,Cy=Cy,Sn=Sn,HCH=HCH,Sc=Sc,Sj=Sj,Saf=Saf,Syf=Syf,Sam=Sam,Sym=Sym, ym1=ym1, yf1=yf1,am1=am1,af1=af1)
 		}else{
 		    out <- list("mufS" = qlogis(fS), 
 						"muR" = R, 
