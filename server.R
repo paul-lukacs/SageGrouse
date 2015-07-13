@@ -47,8 +47,9 @@
         ##  Analysis Pages
         #  IPM
         source("pages/analysis_page/analysis_ipm_server.R", local = T)$value      
-        source("pages/analysis_page/analysis_sight_server.R", local = T)$value      
-        source("pages/analysis_page/analysis_surv_server.R", local = T)$value
+#        source("pages/analysis_page/analysis_sight_server.R", local = T)$value      
+#        source("pages/analysis_page/analysis_surv_server.R", local = T)$value
+		source("pages/analysis_page/analysis_nmix_server.R", local = T)$value
         #  Survival
         #  Pregnancy
         #  Litter Size
