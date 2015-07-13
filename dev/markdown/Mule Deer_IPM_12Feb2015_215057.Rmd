@@ -1,0 +1,117 @@
+--- 
+title: 'Idaho Department of Fish and Game' 
+author: 'PopR Population Model Report' 
+output:
+ html_document 
+---
+*** 
+
+
+####Model Definition 
+**Species:** *Mule Deer* 
+**Unit:** *Boise River* 
+**Years:** *1998*-*2015* 
+
+####Future Harvest 
+
+**Males:** *1210* 
+**Females:** *968* 
+
+####Demographic Settings 
+
+**Adult Survival:** *Constant* 
+**Juvenile Survival:** *Time Varying* 
+**Recruitment:** *Time Varying* 
+
+####Model Fitting 
+
+**MCMC Burnin:** *10000* 
+**MCMC Reps:** *18000* 
+**Thinning Rate:** *1* 
+
+***
+
+
+####Population Size
+
+ ```{r, echo = FALSE, results='asis'}
+
+ source('C:/PopR_Master/custom/process_ipm.R')
+
+ load('C:/PopR_Master/trash/tmp_model.RData') 
+
+kable(mark_pop_tbl(out))
+
+ ``` 
+
+***
+
+
+
+
+####Sex & Age Ratios
+
+ ```{r, echo = FALSE, results='asis'}
+
+ 
+
+kable(mark_rat_tbl(out))
+
+ ``` 
+
+***
+
+
+
+
+####Survival
+
+ ```{r, echo = FALSE, results='asis'}
+
+ 
+
+kable(mark_surv_tbl(out))
+
+ ``` 
+
+***
+
+
+
+
+####Population Trajectory
+
+ ```{r, echo = FALSE, results='asis'}
+
+ 
+
+mark_plot_N(summ_ipm(out), dat)
+
+ ``` 
+
+Figure 1. Model predicted population trajectory.  Solid line
+represents the median estimate.  The shaded area depcits the 95%
+prediction interval.  Blue dots represent the mean of field base 
+estimates. 
+
+***
+
+
+
+
+####Population Growth Rate
+
+ ```{r, echo = FALSE, results='asis'}
+
+ 
+
+mark_plot_L(summ_ipm(out), dat)
+
+ ``` 
+
+Figure 1. Model predicted population growth rate.  The solid 
+line represents the median estimate.  The shaded area depcits the 95% 
+prediction interval. 
+
+***
+

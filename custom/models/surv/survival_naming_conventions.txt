@@ -1,0 +1,11 @@
+Naming conventions for survival models (Needs updating)
+
+age.month.year.covariates.txt
+
+-  age takes a value of s for a single age
+
+-  month takes r for random effect
+
+-  year takes c for constant, which is the same for a single year model
+
+-  covariates take n to represent the absence of covariates

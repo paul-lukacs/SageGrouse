@@ -1,0 +1,4 @@
+Welcome to PopR, the software that helps you explore data, run analyses and generate reports.  This version of the software was created for the analysis of Greater Sage-grouse population data at the University of Montana (2015).
+
+
+Use the navigation bar at the top of this page to move among the various analyses.

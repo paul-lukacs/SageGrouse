@@ -1,0 +1,100 @@
+GMU,UnitChar,Region,Region_ID,MD_PMU,MD_PMU_ID,Elk_Zone,SqKm,SqMi,SortKey
+1,1,Panhandle,1,North Idaho,15,Panhandle,6480,2502.17,1
+2,2,Panhandle,1,North Idaho,15,Panhandle,1851,715,2
+3,3,Panhandle,1,North Idaho,15,Panhandle,1440,556,3
+4,4,Panhandle,1,North Idaho,15,Panhandle,3172,1224.83,4
+4A,04A,Panhandle,1,North Idaho,15,Panhandle,764,295.01,5
+5,5,Panhandle,1,North Idaho,15,Panhandle,1856,717,6
+6,6,Panhandle,1,North Idaho,15,Panhandle,2720,1050.3,7
+7,7,Panhandle,1,North Idaho,15,Panhandle,1464,565.31,8
+8,8,Clearwater,2,North Idaho,15,Palouse,1985,766,9
+8A,08A,Clearwater,2,North Idaho,15,Palouse,1894,731,10
+9,9,Panhandle,1,North Idaho,15,Panhandle,523,202,11
+10,10,Clearwater,2,North Idaho,15,Lolo,3052,1178,12
+10A,10A,Clearwater,2,North Idaho,15,Dworshak,4032,1556.91,13
+11,11,Clearwater,2,Lower Salmon,1,Hells Canyon,1976,763.01,14
+11A,11A,Clearwater,2,Lower Salmon,1,Palouse,2144,827.88,15
+12,12,Clearwater,2,North Idaho,15,Lolo,3080,1189,16
+13,13,Clearwater,2,Lower Salmon,1,Hells Canyon,900,347.52,17
+14,14,Clearwater,2,Lower Salmon,1,Elk City,1476,569.94,18
+15,15,Clearwater,2,North Idaho,15,Elk City,2260,872.67,19
+16,16,Clearwater,2,North Idaho,15,Elk City,1020,393.86,20
+16A,16A,Clearwater,2,North Idaho,15,Selway,736,284.2,21
+17,17,Clearwater,2,North Idaho,15,Selway,3928,1516.75,22
+18,18,Clearwater,2,Lower Salmon,1,Hells Canyon,728,281.11,23
+19,19,Clearwater,2,North Idaho,15,Selway,664,256.4,24
+19A,19A,McCall,3,Middle Fork,3,McCall,1204,464.91,25
+20,20,Clearwater,2,North Idaho,15,Selway,1232,475.72,26
+20A,20A,McCall,3,Middle Fork,3,Middle Fork,1956,755.29,27
+21,21,Salmon,7,Central Mountains,4,Salmon,1292,499,28
+21A,21A,Salmon,7,Mountain Valley,13,Salmon,656,253.31,29
+22,22,McCall,3,Weiser-McCall,2,Weiser River,2192,846.41,30
+23,23,McCall,3,Weiser-McCall,2,McCall,1928,744.47,31
+24,24,McCall,3,Weiser-McCall,2,McCall,2300,888.12,32
+25,25,McCall,3,Middle Fork,3,McCall,2308,891.21,33
+26,26,McCall,3,Middle Fork,3,Middle Fork,1540,594.65,34
+27,27,Salmon,7,Middle Fork,3,Middle Fork,4004,1546.1,35
+28,28,Salmon,7,Central Mountains,4,Salmon,3380,1305.15,36
+29,29,Salmon,7,Mountain Valley,13,Lemhi,1832,707.4,37
+30,30,Salmon,7,Mountain Valley,13,Beaverhead,1044,403.13,38
+30A,30A,Salmon,7,Mountain Valley,13,Beaverhead,724,279.56,39
+31,31,Southwest,3,Weiser-McCall,2,Brownlee,1544,596.2,40
+32,32,McCall,3,Weiser-McCall,2,Weiser River,3740,1444.16,41
+32A,32A,McCall,3,Weiser-McCall,2,Weiser River,1544,596.2,42
+33,33,Southwest,3,Central Mountains,4,Sawtooth,1744,673.42,43
+34,34,Southwest,3,Central Mountains,4,Sawtooth,1148,443.29,44
+35,35,Southwest,3,Central Mountains,4,Sawtooth,972,375.33,45
+36,36,Salmon,7,Central Mountains,4,Sawtooth,2712,1047,46
+36A,36A,Salmon,7,Central Mountains,4,Pioneer,2004,773.82,47
+36B,36B,Salmon,7,Central Mountains,4,Salmon,1524,588.47,48
+37,37,Salmon,7,Mountain Valley,13,Lemhi,1844,712.04,49
+37A,37A,Salmon,7,Mountain Valley,13,Lemhi,904,349,50
+38,38,Southwest,3,Snake River,14,Owyhee-South Hills,5116,1975.48,51
+39,39,Southwest,3,Boise River,5,Boise River,6336,2446.57,52
+40,40,Southwest,3,Owyhee,7,Owyhee-South Hills,5764,2225.7,53
+41,41,Southwest,3,Owyhee,7,Owyhee-South Hills,6296,2431.12,54
+42,42,Southwest,3,Owyhee,7,Owyhee-South Hills,3424,1322.14,55
+43,43,Magic Valley,4,Smoky-Bennett,6,Smoky Mountain,1804,696.59,56
+44,44,Magic Valley,4,Smoky-Bennett,6,Smoky Mountain,1424,549.86,57
+45,45,Magic Valley,4,Smoky-Bennett,6,Bennett Hills,3360,1297.42,58
+46,46,Magic Valley,4,Owyhee,7,Owyhee-South Hills,6888,2659.72,59
+47,47,Magic Valley,4,Owyhee,7,Owyhee-South Hills,888,342.89,60
+48,48,Magic Valley,4,Smoky-Bennett,6,Smoky Mountain,1564,603.92,61
+49,49,Magic Valley,4,Central Mountains,4,Pioneer,2040,787.72,62
+50,50,Upper Snake,6,Central Mountains,4,Pioneer,4272,1649.58,63
+51,51,Upper Snake,6,Mountain Valley,13,Lemhi,2432,939.09,64
+52,52,Magic Valley,4,Smoky-Bennett,6,Bennett Hills,2120,818.61,65
+52A,52A,Magic Valley,4,Snake River,14,Big Desert,4492,1734.53,66
+53,53,Magic Valley,4,Snake River,14,Snake River,4780,1845.74,67
+54,54,Magic Valley,4,South Hills,8,Owyhee-South Hills,3516,1357.66,68
+55,55,Magic Valley,4,South Hills,8,Owyhee-South Hills,2668,1030.22,69
+56,56,Magic Valley,4,Bannock,9,Bannock,2316,894.3,70
+57,57,Magic Valley,4,Bannock,9,Owyhee-South Hills,920,355.25,71
+58,58,Upper Snake,6,Mountain Valley,13,Beaverhead,1576,608.55,72
+59,59,Upper Snake,6,Mountain Valley,13,Beaverhead,942,364,73
+59A,59A,Upper Snake,6,Mountain Valley,13,Beaverhead,1044,403,74
+60,60,Upper Snake,6,Island Park,12,Island Park,1145,442,75
+60A,60A,Upper Snake,6,Island Park,12,Island Park,2374,917,76
+61,61,Upper Snake,6,Island Park,12,Island Park,2052,792,77
+62,62,Upper Snake,6,Island Park,12,Teton,1268,489.62,78
+62A,62A,Upper Snake,6,Island Park,12,Island Park,630,243,79
+63,63,Upper Snake,6,Snake River,14,Snake River,5196,2006.37,80
+63A,63A,Upper Snake,6,Snake River,14,Snake River,832,321.27,81
+64,64,Upper Snake,6,Palisades,11,Palisades,928,358,82
+65,65,Upper Snake,6,Palisades,11,Teton,585,225.89,83
+66,66,Upper Snake,6,Caribou,10,Tex Creek,908,350,84
+66A,66A,Southeast,5,Caribou,10,Diamond Creek,692,267.21,85
+67,67,Upper Snake,6,Palisades,11,Palisades,1068,412,86
+68,68,Southeast,5,Snake River,14,Big Desert,4747,1833,87
+68A,68A,Southeast,5,Snake River,14,Snake River,1152,444.83,88
+69,69,Upper Snake,6,Caribou,10,Tex Creek,3745,1446.09,89
+70,70,Southeast,5,Bannock,9,Bannock,988,381.5,90
+71,71,Southeast,5,Bannock,9,Bannock,1352,522.06,91
+72,72,Southeast,5,Bannock,10,Bannock,1072,413.94,92
+73,73,Southeast,5,Bannock,9,Bannock,3208,1238.73,93
+73A,73A,Southeast,5,Bannock,9,Bannock,1480,571.48,94
+74,74,Southeast,5,Bannock,9,Bannock,1620,625.54,98
+75,75,Southeast,5,Bannock,9,Bear River,968,373.78,99
+76,76,Southeast,5,Caribou,10,Diamond Creek,3596,1388.55,100
+77,77,Southeast,5,Bannock,9,Bear River,680,262.57,101
+78,78,Southeast,5,Bannock,9,Bear River,636,245.58,102

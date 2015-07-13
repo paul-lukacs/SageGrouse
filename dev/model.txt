@@ -1,0 +1,15 @@
+model{
+
+for(yr in 1:nyr){
+	
+for(sex in 1:2){
+PHI[yr,1,sex] ~ dnorm(phi[yr,1,sex], 10)
+PHI[yr,2,sex] ~ dnorm(phi[yr,2,sex], 10)
+FEC[yr,sex] ~ dnorm(fec[yr,sex], 10)
+}
+}
+for(sex in 1:2){
+for(age in 1:2){
+NN[1,age,sex] ~ dnorm(100, 0.0001)T(0,)
+}
+}

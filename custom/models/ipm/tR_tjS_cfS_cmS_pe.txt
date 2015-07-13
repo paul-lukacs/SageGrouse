@@ -1,0 +1,75 @@
+    model{
+				
+		#  Priors on survival and fecundity
+		#  Priors on survival and fecundity
+		mufS ~ dnorm(meanfs, 10)
+		mumS ~ dnorm(meanfs, 200)
+		for(yr in 1:nyr){
+			mujS[yr] ~ dnorm(meanjs, 10)T(-5, 5)
+			logit(jS[yr]) <- mujS[yr]
+			logit(fS[yr]) <- mufS
+			logit(mS[yr]) <- mumS
+			muR[yr] ~ dnorm(meanr, 100)T(0, 1)
+			R[yr] <- muR[yr]
+		}
+
+		#  Prior on first year population size
+		Ny[1] ~ dnorm(muy1, 0.0000001)T(0,)
+		Nf[1] ~ dnorm(muf1, 0.0000001)T(0,)
+		Nm[1] ~ dnorm(mum1, 0.0000001)T(0,)
+		Ntot[1] <- Ny[1] + Nf[1] + Nm[1]
+		ny[1] <- Ny[1] 
+		nm[1] <- Nm[1] + mH[1]
+		nf[1] <- Nf[1] + fH[1]
+		
+		for(yr in 2:nyr){
+			#  YOY
+			Ny[yr] ~ dpois(Nf[yr] * R[yr])
+			#  Adults
+			nf[yr] <- round(Nf[yr-1] * fS[yr-1] + 0.5 * Ny[yr-1] * jS[yr-1])
+			nnff[yr] <- nf[yr] - fH[yr]
+			Nf[yr] ~ dpois(ifelse(nnff[yr] <= 0, 1, nnff[yr]))
+			nm[yr] <- round(Nm[yr-1] * mS[yr-1] + 0.5 * Ny[yr-1] * jS[yr-1])
+			nnmm[yr] <- nm[yr] - mH[yr]
+			Nm[yr] ~ dpois(ifelse(nnmm[yr] <= 0, 1, nnmm[yr]))
+			Ntot[yr] <- Ny[yr] + Nf[yr] + Nm[yr]
+		}  #  y
+
+		#  Observation Models
+		#  Abundance Observation
+		for(i in 2:nair){
+			counts[i] ~ dnorm(Ntot[airyr[i]], nse[i])T(0,)
+		}
+	
+		#  YF Ratio Observations
+		for(i in 1:nyf){
+			yfdat[i] ~ dnorm(R[yfyr[i]]*100, yfse[i])T(0, 100)
+		}
+		
+		#  MF Ratio Observations
+		for(i in 1:nmf){
+			mfdat[i] ~ dnorm(mf[mfyr[i]]*100, mfse[i])T(0, 100)
+		}
+		
+		#  Survival Observations
+		for(i in 1:nSf){
+			fSdat[i] ~ dnorm(fS[fSyr[i]], fSse[i])T(0, 1)
+		}
+
+		for(i in 1:nSj){
+			jSdat[i] ~ dnorm(jS[jSyr[i]], jSse[i])T(0,1)	
+		}
+		
+		#  Derived 
+		for(yr in 1:nyr){
+			mf[yr] <- (Nm[yr] + 0.001)/(Nf[yr] + 0.001)
+			yf[yr] <- (Ny[yr] + 0.001)/(Nf[yr] + 0.001)
+		}
+		lambda[1] <- 1
+		for(yr in 2:nyr){
+		 lambda[yr] <- (Ntot[yr] + 0.001)/(Ntot[yr-1] + 0.001)
+		 logla[yr] <- log(lambda[yr])
+		}
+		geoLambda <- exp((1/(nyr-1))*sum(logla[2:(nyr)])) 
+		
+	}
