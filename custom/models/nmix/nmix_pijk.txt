@@ -1,0 +1,62 @@
+model {
+
+# Priors
+
+#for the ecological (state) model
+	for (i in 1:nsite){
+		eps[i] ~ dnorm(0, tau.lam)T(-20,20) #random effect of site
+	}
+	tau.lam <- 1/(sd.lam * sd.lam) 
+	sd.lam ~ dunif (0,3)
+
+#for the observation model
+	for (k in 1:nyear){
+		p0[k] ~ dunif (0,1)
+		logitp0[k] <- log(p0[k]/(1-p0[k]))
+		int.lam[k] ~ dunif (-5,5)
+	} #this is the prior for the intercept of p, which differs by year
+
+	for (j in 1:nobs){
+		teta.p[j] ~ dnorm (0, tau.p)T(-20,20)
+	} #prior for random effect on p for site-survey-year
+
+	tau.p <- 1/(sd.p * sd.p) #random effect of site-survey-year on p
+	sd.p ~ dunif (0,5)
+	#bdate ~ dunif(-5, 5) #coeff for date
+	#btime ~ dunif(-5, 5) #coeff for time
+
+# Ecological submodel: true abundance 
+	for (k in 1:nyear){    #loop over years
+		for (i in 1:nsite){    #loop over sites (leks)
+	      		N[i,k] ~ dpois(lambda[i,k])
+			log(lambda[i,k]) <- int.lam[k] + eps[i]
+		}  #  site i
+	}   #  year k
+
+	# Observation model for replicated counts
+	for (j in 1:nobs){    #loop over temporal reps
+   		y[j] ~ dbin(p[j], N[site[j],year[j]])
+		logit(p[j]) <- logitp0[year[j]] + teta.p[j]  #You can add the coeffecients here as needed/wanted
+		
+   		# Assess model fit using Chi-squared discrepancy
+	      	#Compute fit statistic E for observed data
+	        eval[j] <- p[j] * N[site[j], year[j]]			  # Expected values
+        	sd.resi[j] <- sqrt(eval[j]*(1-p[j])) + 0.5
+		E[j] <-(y[j] - eval[j])/ sd.resi[j]
+		E2[j] <- pow(E[j],2)
+
+	        # Generate replicate data and compute fit stats for them
+              	y.new[j] ~ dbin(p[j], N[site[j], year[j]])
+              	E.new[j] <-(y.new[j] - eval[j])/ sd.resi[j]
+	  	E2.new[j] <- pow(E.new[j],2)
+	} #obs j
+			
+# Derived parameters
+	for (k in 1:nyear){
+	   totalN[k] <- sum(N[,k])	# total population size across all sites
+	   mean.abundance[k] <- mean(lambda[,k])
+	   }
+	mp <- mean(p[])
+	fit <- sum(E2)
+	fit.new <- sum(E2.new)
+}

@@ -76,6 +76,7 @@
         return()
       
       isolate({
+		  
         hold_nmixmodel <- try(nmix_wrapper(nmix_subdata(), input), 
                                silent = T)
         

@@ -15,11 +15,13 @@
     source("custom/process_surv.R")
     source("custom/process_sight.R")
     source("custom/game_lookup.R")
+	source("custom/nmix_funs.R")
     #source("custom/dic_tbl.r")
     source("helpers/name_outputs.r")
     source("helpers/gen_init.R")
     source("misc/packages.R")
-    load("grouseStates.RData")
+    load("grouseStates.RData")	# IPM demographic data
+#	load("lekCountData.RData")	# N mixture lek count data
 
     daus <- read.csv("daus.csv", as.is = T)
     

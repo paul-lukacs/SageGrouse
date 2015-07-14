@@ -51,7 +51,7 @@ fixedPage(
                                       as.POSIXlt(Sys.time())$year + 2), 
                           step = 1,
                           ticks = TRUE,
-            #              sep = "",
+                          sep = "",
                           width = "100%")
             )
           )
