@@ -23,7 +23,7 @@
     output$nmix_sub <- renderText({
       
       paste(input$nmix_dau,
-            " / Year: ", input$nmix_year[1],
+            " / Year: ", input$nmix_year[1]
             , sep = "")
 
     })
@@ -64,7 +64,7 @@
       if(input$nmix_getdata == 0)
         return()
       
-      tmp <- get_nmix(nmix$data, input)
+     tmp <- get_nmix_dat(input)
       
     return(tmp)
     })
@@ -77,13 +77,16 @@
       
       isolate({
 		  
-        hold_nmixmodel <- try(nmix_wrapper(nmix_subdata(), input), 
+        hold_nmixmodel <- try(nmix_wrapper(input), 
                                silent = T)
         
         if(class(hold_nmixmodel) != "try-error"){
           
+
           showshinyalert(session, "nmix_runalert", 
-                         paste(input$nmix_year,
+                         paste(input$nmix_year[1],
+								"-",
+								input$nmix_year[2],
                                input$nmix_dau, 
                                "N-mixture model",
                                input$nmix_fitgo,
@@ -91,14 +94,16 @@
                          styleclass = "success")
 
           nmix$fit <- hold_nmixmodel
-          nmix$summ <- try(nmix.muleDeer(input, nmix_subdata()))
+          #nmix$summ <- try(nmix.muleDeer(input, nmix_subdata()))
           
         }else{
 
           showshinyalert(session, "nmix_runalert", 
-                         paste(input$nmix_year,
+                         paste(input$nmix_year[1],
+								"-",
+								input$nmix_year[2],
                                input$nmix_dau, 
-                               "sightability model",
+                               "N-mixture model",
                                input$nmix_fitgo,
                                "failed!"),
                          styleclass = "danger")

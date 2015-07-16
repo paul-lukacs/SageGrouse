@@ -15,7 +15,7 @@
     source("custom/process_surv.R")
     source("custom/process_sight.R")
     source("custom/game_lookup.R")
-	source("custom/nmix_funs.R")
+	source("custom/nmix_funcs.R")
     #source("custom/dic_tbl.r")
     source("helpers/name_outputs.r")
     source("helpers/gen_init.R")

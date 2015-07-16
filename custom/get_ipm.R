@@ -190,9 +190,9 @@
 				#  Initial Values 
 				inits <- replicate(3, get_init(dat, input, model_name), 
 									simplify = F)
-				dat$muy1 <- inits[[1]]$Ny[1]
-				dat$muf1 <- inits[[1]]$Nf[1]
-				dat$mum1 <- inits[[1]]$Nm[1]
+			#	dat$muy1 <- inits[[1]]$Ny[1]
+			#	dat$muf1 <- inits[[1]]$Nf[1]
+			#	dat$mum1 <- inits[[1]]$Nm[1]
 				#  Parameters to monitor
 				parms <- get_parms(input)
 				incProgress(0.2, message = "Data ready, running model...")

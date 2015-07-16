@@ -10,11 +10,11 @@ fixedPage(
       h6(textOutput("nmix_sub", inline = T), style = "color:darkgray")))
 
   ),
-  shinyalert("nmix", click.hide = FALSE, auto.close.after = NULL),
+  shinyalert("nmix_runalert", click.hide = FALSE, auto.close.after = NULL),
   tabsetPanel(
     tabPanel("Setup",
       hr(),
-	  
+	
 ########################################################################	  
  #     h4("Define Species & Space"),
  #     wellPanel(
@@ -45,7 +45,7 @@ fixedPage(
 #          )
 #        )
 #      ),
-	h4("Define Species & IPM Database"),
+	h4("Define Species & Lek Count Database"),
       wellPanel(
 	  fluidRow(
           column(6,
@@ -91,6 +91,44 @@ fixedPage(
           )
         )
       ),
+	  h4("MCMC Controls"),
+      wellPanel(
+        fluidRow(
+          column(4,
+            tags$div(title = "Change at will if you know what you are doing",
+              sliderInput("nmix_ipmburn", "Burnin Length", 
+                min = 1, 
+                max = 50000, 
+                value = 15000,
+                step = 5000, 
+                round = T,
+                width = "100%")
+            )
+          ),                
+          column(4,
+            tags$div(title = "Change at will if you know what you are doing",
+              sliderInput("nmix_ipmiter", "MCMC Iterations", 
+                min = 100, 
+                max = 55000, 
+                value = 25000,
+                step = 5000, 
+                round = T,
+                width = "100%")
+            )
+          ),
+          column(4,
+            tags$div(title = "Change at will if you know what you are doing",
+              sliderInput("nmix_ipmthin", "Thinning Rate", 
+                min = 1, 
+                max = 100, 
+                value = 2,
+                step = 1, 
+                round = T,
+                width = "100%")
+            )
+          )
+        )
+		),
       
 ####################################
 #      h4("Model Controls"),
