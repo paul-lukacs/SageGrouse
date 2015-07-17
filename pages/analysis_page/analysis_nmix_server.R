@@ -105,7 +105,8 @@
                                input$nmix_dau, 
                                "N-mixture model",
                                input$nmix_fitgo,
-                               "failed!"),
+                               "failed!\n",
+							   hold_nmixmodel),
                          styleclass = "danger")
         }
       })

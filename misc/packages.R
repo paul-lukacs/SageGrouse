@@ -10,3 +10,4 @@
     require(dplyr)
 	require(RCurl)
 	require(googleVis)
+	require(sendmailR)  # for N-mixture output emails

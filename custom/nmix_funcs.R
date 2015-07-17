@@ -5,8 +5,8 @@
 #
 
 		nmix_wrapper <- function( input ){
-		#	withProgress(message = "Preparing Data", value = 0.2, {
-		#	  incProgress(0.1, message = "Preparing Data")
+	#		withProgress(message = "Preparing Data", value = 0.2, {
+	#		  incProgress(0.1, message = "Preparing Data")
 			# process the nmix workflow after fit model button is clicked
 			sg <- get_nmix_dat(input)  # read data
 			dat <- format_nmix_jagsd( sg, input ) # format data for jags
@@ -41,14 +41,14 @@
 					n.chains = 3,
 					n.iter = ipmiter,
 					n.burnin = ipmburn,
-					n.thin = input$ipmthin,
+					n.thin = input$nmix_ipmthin,
 					progress.bar = "none"), silent = F)
-		#		incProgress(0.2, message = "Error Check")  	
+	#			incProgress(0.2, message = "Error Check")  	
 				#  Retry if failed, up to 10 times
 				tryit <- 0
 				while(class(out) == "try-error" & tryit < 10){
-		#			incProgress(0.05, 
-		#						message = paste("Error, Retry", tryit, "/10"))
+	#				incProgress(0.05, 
+	#							message = paste("Error, Retry", tryit, "/10"))
 					tryit <- tryit + 1
 					out <- try(jags(data = dat,
 						inits = inits,
@@ -79,9 +79,18 @@
 					out$iter <- ipmiter
 					out$thin <- input$ipmthin
 				}
-		#	setProgress(1, message = "Finished")  	
-		#	})
-			out
+	#		setProgress(1, message = "Finished")  	
+	#		})
+			if(class(out) != "try-error"){
+				z<-print(out)
+				body<-list(paste("Crushing it from ", out$year[1], "to", out$year[2]), mime_part(z$summary, name="out") )
+				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+	#			sendmail( "paul.lukacs@umontana.edu", "james.nowak@mso.umt.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+			} else {
+				body<-list("Crushing it! (even though the model failed)" )
+				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+			}
+			return(out)
 		}
 
 
@@ -155,7 +164,7 @@
 						
 			
 			# for now everything is the same so hard code.
-			out <- c("totalN", "mean.abundance", "r.sg", "sd.lam", "sd.p", "fit", "fit.new", "p0", "mp")
+			out <- c("totalN", "mean.abundance", "sd.lam", "sd.p", "fit", "fit.new", "p0", "mp")
 			
 			return(out)	
 		}

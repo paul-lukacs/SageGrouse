@@ -108,7 +108,7 @@ fixedPage(
           column(4,
             tags$div(title = "Change at will if you know what you are doing",
               sliderInput("nmix_ipmiter", "MCMC Iterations", 
-                min = 100, 
+                min = 10, 
                 max = 55000, 
                 value = 25000,
                 step = 5000, 
@@ -127,7 +127,19 @@ fixedPage(
                 width = "100%")
             )
           )
-        )
+        ),
+		fluidRow(
+			column(4,
+				tags$div(title = "Email address for output",
+					textInput("nmix_email", h5("Email address:"), "your.email@domain.com")
+				)
+			),
+			column(8,
+				tags$div(title = "Email address for output",
+					HTML(paste("","The N-mixture fitting procedure is time consuming.", "Results will be sent to this address upon completion.", sep = '<br/>'))
+				)
+			)	
+		)
 		),
       
 ####################################

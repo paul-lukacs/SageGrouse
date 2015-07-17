@@ -70,7 +70,11 @@ setwd("C:/Users/paul.lukacs/Documents/GitHub/SageGrouse" )
 					n.chains = 3,
 					n.iter = ipmiter,
 					n.burnin = ipmburn,
-					n.thin = input$ipmthin )
+					n.thin = input$nmix_ipmthin )
+			body=list("Crushing it!", mime_part(z$summary)
+			sendmail( from, "paul.lukacs@umontana.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+			sendmail( from, "james.nowak@umontana.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+
 			
 			out <- try(jags(data = dat,
 					inits = inits,
