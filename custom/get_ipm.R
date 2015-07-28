@@ -33,13 +33,13 @@
 			if(is.na(meanr)){
 				meanr <- 0.61
 			}
-			meanjs <- mean(x$YoungSurvival, na.rm = T) 
+			meanjs <- qlogis(mean(x$YoungSurvival, na.rm = T) )
 			if(is.na(meanjs)){
-				meanjs <- 0.56
+				meanjs <- qlogis(0.56)
 			}
-			meanfs <- mean(x$FemaleSurvival, na.rm = T) 
+			meanfs <- qlogis( mean(x$FemaleSurvival, na.rm = T) )
 			if(is.na(meanfs)){
-				meanfs <- 0.85
+				meanfs <- qlogis( 0.85 )
 			}
 			
 			#  Time varying mean calculations
