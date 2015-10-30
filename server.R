@@ -21,6 +21,8 @@
     source("helpers/gen_init.R")
     source("misc/packages.R")
     load("grouseStates.RData")	# IPM demographic data
+	load("grousePopulations.RData")
+	load("grouseZones.RData")
 #	load("lekCountData.RData")	# N mixture lek count data
 
     daus <- read.csv("daus.csv", as.is = T)

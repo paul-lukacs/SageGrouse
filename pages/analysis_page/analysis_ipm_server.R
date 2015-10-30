@@ -9,7 +9,14 @@
   #    load("grouseStates.RData")
       updateSelectInput(session, "state", 
 		    choices = levels(grouseStates$StateNames),
-		    selected = "Montana")
+		    selected = "")
+	  updateSelectInput(session, "mzone", 
+		    choices = levels(grouseZones$ZoneNames),
+		    selected = "")
+	  updateSelectInput(session, "popn", 
+		    choices = levels(grousePopulations$popName),
+		    selected = "")
+			
         paste(input$critter, "IPM")
     })
     

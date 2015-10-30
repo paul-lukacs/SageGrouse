@@ -35,9 +35,32 @@ fixedPage(
         fluidRow(
           column(5,
             tags$div(title = "Select a state to analyze", 
-              selectizeInput("state", "Analysis State", 
+              selectizeInput("state", "State", 
                 choices = "",
-                selected = "Montana",
+                selected = "",
+                options = list(dropdownParent = "body",
+                  maxItems = 1))
+            )
+          ),
+          column(7,
+            tags$div(title = "Select a management zone to analyze", 
+              selectizeInput("mzone", "Management Zone", 
+                choices = "",
+                selected = "",
+                options = list(dropdownParent = "body",
+                  maxItems = 1))
+            )
+          )
+        )
+      ),
+#	  h4("Define Space & Time"),
+      wellPanel(
+        fluidRow(
+          column(5,
+            tags$div(title = "Select a population to analyze", 
+              selectizeInput("popn", "Population", 
+                choices = "",
+				selected = "",
                 options = list(dropdownParent = "body",
                   maxItems = 1))
             )
@@ -64,22 +87,21 @@ fixedPage(
           column(4, 
             tags$div(title = "Choose how recruitment varies or hold it constant",
               select2Input("recruitMod", "Recruitment",
-                              choices = c("Constant", 
-                                          "Time Varying"),
+                              choices = c("Time Varying", "Constant"),
                            type = "select")
             )
           ),
           column(4,
             tags$div(title = "Choose how juvenile survival varies or hold it constant",
               select2Input("juvSmod", "Juvenile Survival",
-                           choices = list("Constant", "Time Varying"),
+                           choices = list("Time Varying", "Constant"),
                            type = "select")
             )
           ),
           column(4,
             tags$div(title = "Choose how adult survival varies or hold it constant",
               select2Input("adultSmod", "Adult Survival",
-                           choices = list("Constant", "Time Varying"),
+                           choices = list("Time Varying", "Constant"),
                            type = "select")
             )
           )
@@ -197,7 +219,7 @@ fixedPage(
       ),
       checkboxInput("ipm_rfd", label = "Show field data", value = FALSE),
       tags$div(checkboxInput("ipm_rserr", label = "Add CI", value = FALSE), 
-                style = "padding-bottom:200px")   
+               style = "padding-bottom:200px")   
       
     , icon = icon("bar-chart-o"), id = "ipm_plottab"
     ),  #  tabPanel, IPM plot output

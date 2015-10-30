@@ -83,11 +83,12 @@
 	#		})
 			if(class(out) != "try-error"){
 				z<-print(out)
-				body<-list(paste("Crushing it from ", out$year[1], "to", out$year[2]), mime_part(z$summary, name="out") )
+				body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(z$summary, name="out") )
 				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+				#send.mail( from="paul.lukacs@umontana.edu", to=input$nmix_email, subject="PopR N-mixture Results", body=body[[1]] ) 
 	#			sendmail( "paul.lukacs@umontana.edu", "james.nowak@mso.umt.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
 			} else {
-				body<-list("Crushing it! (even though the model failed)" )
+				body<-list("N-mixture model model failed!" )
 				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
 			}
 			return(out)
@@ -114,19 +115,34 @@
 			#  takes shiny input object
 			#  returns data subset by species, dau and year
 			#  part of nmix workflow
-			if(is.null(input$nmix_dbname))
-				return()
+			
+			if( is.null( input$lekDataFile ) ){
+				
+				if(is.null(input$nmix_dbname))
+					return()
 
-			#  Read data from database
-			load(file.path("data", input$nmix_dbname))
+				#  Read data from database
+				load(file.path("data", input$nmix_dbname))
+				
+			} else {
+				
+				inFile <- input$lekDataFile
+
+				if (is.null(inFile))
+					return(NULL)
+    
+				lekCountData <- read.csv(inFile$datapath, header=TRUE, sep=",",  quote="")
+				
+				
+			}
 			#  Subset and order
-			sg <- lekCountData %>%
-			#	mutate(DAU = numchar_dau(DAU),
+			sg <- lekCountData  %>%
+			##	mutate(DAU = numchar_dau(DAU),
 				mutate(state = numchar_state(StateID),
   					Species = rename_sp(Species)) %>%
 				arrange(StateID, Year) %>%
 				filter(state == input$nmix_dau & Species == input$nmix_critter &
-  					 Year >= input$nmix_year[1] & Year <= input$nmix_year[2])	
+ 				  	 Year >= input$nmix_year[1] & Year <= input$nmix_year[2])	
 		
 			return(sg)
 		}

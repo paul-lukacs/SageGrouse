@@ -4,6 +4,27 @@
 	#  Paul Lukacs
 	#  07/2015
 ###############################################################################
+
+	################### file upload code
+	output$contents <- renderTable({
+    
+    # input$file1 will be NULL initially. After the user selects
+    # and uploads a file, it will be a data frame with 'name',
+    # 'size', 'type', and 'datapath' columns. The 'datapath'
+    # column will contain the local filenames where the data can
+    # be found.
+
+    inFile <- input$lekDataFile
+
+    if (is.null(inFile))
+      return(NULL)
+    
+	read.csv(inFile$datapath, header=TRUE, sep=",",  quote="")
+   # read.csv(inFile$datapath, header=input$header, sep=input$sep, 
+   #				 quote=input$quote)
+	})
+	#######################
+
     #  Header subtitle
 
     output$nmix_sp <- renderText({    
@@ -14,7 +35,13 @@
       updateSelectInput(session, "nmix_dau", 
 		    choices = levels(grouseStates$StateNames),
 		    selected = "Montana")
-			
+		
+	  updateSelectInput(session, "nmix_mzone", 
+		    choices = levels(grouseZones$ZoneNames),
+		    selected = "")
+	  updateSelectInput(session, "nmix_popn", 
+		    choices = levels(grousePopulations$popName),
+		    selected = "")		
       paste(input$nmix_critter, "N-Mixture - In beta!")
       
     })
@@ -122,10 +149,11 @@
     })
       
     output$nmix_raw <- renderDataTable({
-      if(is.null(nmix_subdata()))
-        return()
-      
-      nmix_subdata()}, options = list(searching = T,
+      #if(is.null(nmix_subdata()))
+      #  return()
+	  # nmix_subdata()
+      read_nmix_db(input)
+      }, options = list(searching = T,
                                       pageLength = 15,
                                       lengthMenu = list(c(15, 25, -1),
                                                         c("15", "25", "All")))

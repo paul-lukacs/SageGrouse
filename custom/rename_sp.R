@@ -3,8 +3,8 @@
     #  1/2015
 ################################################################################
     rename_sp <- function(x){
-      trans_vec <- c("MD" = "Mule Deer", 
-	                 "WT" = "White-tailed Deer", 
+      trans_vec <- c(#"MD" = "Mule Deer", 
+	                 #"WT" = "White-tailed Deer", 
 					 "SG" = "Sage Grouse"
 					 )
       out <- as.character(trans_vec[x])

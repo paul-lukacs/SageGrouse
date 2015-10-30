@@ -62,16 +62,51 @@ fixedPage(
                            type = "select")
             )
           )
-        )
+        ),
+################ file upload code
+		fluidRow(
+			column(12,
+				fileInput('lekDataFile', 'Choose CSV File in place of database',
+					accept=c('text/csv', 
+						 'text/comma-separated-values,text/plain', 
+						 '.csv')
+					)
+			)
+		)
+#################
+		
       ),
 	  h4("Define Space & Time"),
       wellPanel(
         fluidRow(
           column(5,
             tags$div(title = "Select a state to analyze", 
-              selectizeInput("nmix_dau", "Analysis State", 
+              selectizeInput("nmix_dau", "State", 
                 choices = "",
                 selected = "Montana",
+                options = list(dropdownParent = "body",
+                  maxItems = 1))
+            )
+          ),
+          column(7,
+            tags$div(title = "Select a management zone to analyze", 
+              selectizeInput("nmix_mzone", "Management Zone", 
+                choices = "",
+                selected = "",
+                options = list(dropdownParent = "body",
+                  maxItems = 1))
+            )
+          )
+        )
+      ),
+#	  h4("Define Space & Time"),
+      wellPanel(
+        fluidRow(
+          column(5,
+            tags$div(title = "Select a population to analyze", 
+              selectizeInput("nmix_popn", "Population", 
+                choices = "",
+                selected = "",
                 options = list(dropdownParent = "body",
                   maxItems = 1))
             )
@@ -131,7 +166,8 @@ fixedPage(
 		fluidRow(
 			column(4,
 				tags$div(title = "Email address for output",
-					textInput("nmix_email", h5("Email address:"), "your.email@domain.com")
+					textInput("nmix_email", h5("Email address:"), "your.email@domain.com"), 
+					style= "height: 200px"
 				)
 			),
 			column(8,
