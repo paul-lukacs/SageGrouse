@@ -71,6 +71,51 @@ setwd("C:/Users/paul.lukacs/Documents/GitHub/SageGrouse" )
 					n.iter = ipmiter,
 					n.burnin = ipmburn,
 					n.thin = input$nmix_ipmthin )
+					
+			############## markdown #############################		
+			
+			ntot <- out$BUGSoutput$mean$totalN
+			sdtot <- out$BUGSoutput$sd$totalN
+			p <- out$BUGSoutput$mean$p0
+			sdp <- out$BUGSoutput$sd$p0
+			outtab <- data.frame( Ntotal=ntot, Nsd=sdtot, p=p, sdp=sdp  )
+			colnames(outtab) <- c("Abundance", "SD(Abundance)", "Detection", "SD(detection)"  )
+			
+			
+			
+			setwd( "c:\\temp" )
+			owd="c:\\temp"
+			#on.exit(setwd(owd))
+			knitr::opts_knit$set(root.dir = owd)
+
+		
+			#  Italics function
+			italics <- function(x){
+				paste("*", x, "*", sep = "")
+			}
+    
+			dt <- Sys.time()
+			doc_name <- "nmixReport.Rmd"
+				
+		#  Define YAML header
+			cat("---", 
+			"\ntitle: 'PopR Sage-Grouse Module'", 
+			"\nauthor: 'N-mixture Model Report'",
+			paste("\ndate:", format(Sys.time(), "%b %d, %Y")), 
+			paste("\noutput:\n", 'html_document'),
+			"\n---\n",
+			file = paste(doc_name, sep = ""))
+		
+			cat("\n\n\n####Population Size\n\n",
+			"```{r, echo = FALSE, results='asis'}\n\n",
+			"\n\nkable(print(outtab), align = 'c')\n\n",
+			"```",
+			"\n\n-----\n\n",
+			append = T, file = doc_name)
+			render( doc_name, "html_document" )
+				############## markdown #############################
+					
+					
 			body=list("Crushing it!", mime_part(z$summary)
 			sendmail( from, "paul.lukacs@umontana.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
 			sendmail( from, "james.nowak@umontana.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 

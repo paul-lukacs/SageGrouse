@@ -83,7 +83,9 @@
 	#		})
 			if(class(out) != "try-error"){
 				z<-print(out)
-				body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(z$summary, name="out") )
+				report <- mark_nmix_report(input, z )
+	#		#	body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(z$summary, name="out") )
+				body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(report, name="nmix_report.html") )
 				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
 				#send.mail( from="paul.lukacs@umontana.edu", to=input$nmix_email, subject="PopR N-mixture Results", body=body[[1]] ) 
 	#			sendmail( "paul.lukacs@umontana.edu", "james.nowak@mso.umt.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
@@ -94,6 +96,43 @@
 			return(out)
 		}
 
+#################################################################################
+
+		mark_nmix_report <- function( input, results, report_type="html_document" ){
+			# generate HTML file to attach to email displaying the JAGS output for the N-mixture model
+			#
+			owd <- setwd(tempdir())
+			on.exit(setwd(owd))
+			knitr::opts_knit$set(root.dir = owd)
+
+		
+			#  Italics function
+			italics <- function(x){
+				paste("*", x, "*", sep = "")
+			}
+    
+			dt <- Sys.time()
+			doc_name <- "nmixReport.Rmd"
+				
+		#  Define YAML header
+			cat("---", 
+			"\ntitle: 'Sage-Grouse'", 
+			"\nauthor: 'PopR Population Model Report'",
+			paste("\ndate:", format(Sys.time(), "%b %d, %Y")), 
+			paste("\noutput:\n", 'html_document'),
+			"\n---\n",
+			file = paste(doc_name, sep = ""))
+		
+			cat("\n\n\n####Population Size\n\n",
+			"```{r, echo = FALSE, results='asis'}\n\n",
+			"source('custom/nmix_funcs.R')\n\n",
+			"results$summary",
+			"```",
+			"\n\n-----\n\n",
+			append = T, file = doc_name)
+			return(render(doc_name, report_type))
+		}
+		
 
 #################################################################################
 		get_nmix_dat <- function(input){
