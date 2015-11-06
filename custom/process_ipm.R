@@ -129,7 +129,7 @@
 		ipm_plot_L <- function(x){
 			#  Format model output
 			tmp_yrs <- attributes(x)$year
-			yrs <- tmp_yrs[1]:tmp_yrs[2]
+			yrs <- tmp_yrs[1]:(tmp_yrs[2]-1)
 			pin <- data.frame(yr = yrs, x$lambda)
 			colnames(pin) <- c("yr", "low", "mid", "hi")
 			
@@ -337,20 +337,20 @@
 		mark_ipm_pop_tbl <- function(out){
 			#  Small function to create column names
 			cnm <- function(dem){
-				c("LowerCI", dem, "UpperCI")
+				c("LowerCL", dem, "UpperCL")
 			}
 			x <- summ_ipm(out)
 			yr <- attributes(x)$year
-			x_tbl <- as.data.frame(cbind(yr[1]:yr[2], x$Ntot, x$Nm, x$Nf, x$Ny))
-			colnames(x_tbl) <- c("Year", cnm("Total"), cnm("Male"), 
-									cnm("Female"), cnm("Young"))
+			x_tbl <- as.data.frame(cbind(yr[1]:yr[2], x$Ntot))# , x$Nm, x$Nf, x$Ny))
+			colnames(x_tbl) <- c("Year", cnm("Total"))# , cnm("Male"), 
+									#cnm("Female"), cnm("Young"))
 		round(x_tbl)
 		}
 		#  Ratio Table
 		mark_ipm_rat_tbl <- function(out){
 			#  Small function to create column names
 			cnm <- function(dem){
-				c("LowerCI", dem, "UpperCI")
+				c("LowerCL", dem, "UpperCL")
 			}
 			x <- summ_ipm(out)
 			yr <- attributes(x)$year
@@ -362,7 +362,7 @@
 		mark_ipm_surv_tbl <- function(out){
 			#  Small function to create column names
 			cnm <- function(dem){
-				c("LowerCI", dem, "UpperCI")
+				c("LowerCL", dem, "UpperCL")
 			}
 			x <- summ_ipm(out)
 			yr <- attributes(x)$year

@@ -28,7 +28,18 @@ fixedPage(
                            type = "select")
             )
           )
-        )
+        ),
+		################ file upload code
+		fluidRow(
+			column(12,
+				fileInput('ipmDataFile', 'Choose CSV File in place of database',
+					accept=c('text/csv', 
+						 'text/comma-separated-values,text/plain', 
+						 '.csv')
+					)
+			)
+		)
+		#################
       ),
       h4("Define Space & Time"),
       wellPanel(
@@ -209,17 +220,17 @@ fixedPage(
       hr(style = "background:gray;
          border:0;
          height:2px;
-         width:100%"),
-      h4("Sex & Age Ratios"),
-      plotOutput("ipmplotR", height = "350px"),
-      tags$div(
-        h6(HTML(paste(tags$span(style = "color:red", "- Male/100 Females"), 
-                      tags$span(style = "color:blue", "- Juveniles/100 Females"), 
-                      sep = " ")))
-      ),
-      checkboxInput("ipm_rfd", label = "Show field data", value = FALSE),
-      tags$div(checkboxInput("ipm_rserr", label = "Add CI", value = FALSE), 
-               style = "padding-bottom:200px")   
+         width:100%") #,
+   #   h4("Sex & Age Ratios"),
+   #   plotOutput("ipmplotR", height = "350px"),
+   #   tags$div(
+   #     h6(HTML(paste(tags$span(style = "color:red", "- Male/100 Females"), 
+   #                   tags$span(style = "color:blue", "- Juveniles/100 Females"), 
+   #                   sep = " ")))
+   #   ),
+   #   checkboxInput("ipm_rfd", label = "Show field data", value = FALSE),
+   #   tags$div(checkboxInput("ipm_rserr", label = "Add CI", value = FALSE), 
+   #            style = "padding-bottom:200px")   
       
     , icon = icon("bar-chart-o"), id = "ipm_plottab"
     ),  #  tabPanel, IPM plot output
@@ -228,8 +239,8 @@ fixedPage(
       hr(),
       h4("Population Size"),
       dataTableOutput("ipmtable1"),
-      h4("Sex & Age Ratios"),
-      dataTableOutput("ipmtable2"),
+    #  h4("Sex & Age Ratios"),
+    #  dataTableOutput("ipmtable2"),
       h4("Survival"),
       tags$div(dataTableOutput("ipmtable3"), 
                style = "padding-bottom:200px"),      

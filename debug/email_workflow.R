@@ -21,6 +21,16 @@ email <- send.mail(from = sender,
                    authenticate = TRUE,
                    send = FALSE)
 				   
+sender <- "PopR.results@cfc.umt.edu"
+recipients <- c("paul.lukacs@gmail.com")
+email <- send.mail(from = sender,
+                   to = recipients,
+                   subject="Subject of the email",
+                   body = "c:/temp/nmixReport.html",
+				   html= TRUE,
+                   smtp = list(host.name = "smtp.umt.edu", port = 25),
+                   authenticate = FALSE, 
+                   send = TRUE)
 				   
 				   
 shinyUI(fluidPage(

@@ -81,17 +81,85 @@
 				}
 	#		setProgress(1, message = "Finished")  	
 	#		})
+	
+			ntot <- out$BUGSoutput$mean$totalN
+			sdtot <- out$BUGSoutput$sd$totalN
+			p <- out$BUGSoutput$mean$p0
+			sdp <- out$BUGSoutput$sd$p0
+			RGN <- out$BUGSoutput$summary[ grep("totalN", rownames(out$BUGSoutput$summary)),"Rhat"]
+			RGp <- out$BUGSoutput$summary[ grep("p0", rownames(out$BUGSoutput$summary)),"Rhat"]
+			outtab <- data.frame( year=c(input$nmix_year[1]:input$nmix_year[2]),Ntotal=ntot, Nsd=sdtot, rgn=RGN, 
+						p=p, sdp=sdp, rgp=RGp  )
+			colnames(outtab) <- c("Year", "Abundance", "SD(Abundance)", "R-hat(N)", "Detection", "SD(detection)", "R-hat (p)"  )
+			rownames(outtab) <- NULL
+								
+			setwd( "c:\\temp" )  		## fix for server implementation
+			owd="c:\\temp"
+			#on.exit(setwd(owd))
+			knitr::opts_knit$set(root.dir = owd)
+		
+			#  Italics function
+			italics <- function(x){
+				paste("*", x, "*", sep = "")
+			}
+    
+			dt <- Sys.time()
+			doc_name <- "nmixReport.Rmd"
+				
+		#  Define YAML header
+			cat("---", 
+			"\ntitle: 'PopR Sage-Grouse Module'", 
+			"\nauthor: 'N-mixture Model Report'",
+			paste("\ndate:", format(Sys.time(), "%b %d, %Y")), 
+			paste("\noutput:\n", 'html_document'),
+			"\n---\n",
+			file = paste(doc_name, sep = ""))
+		
+			cat("\n\n\n####Population Size\n\n",
+			"```{r, echo = FALSE, results='asis'}\n\n",
+			"\n\nkable(outtab, align = 'c')\n\n",
+			"```",
+			"\n\n-----\n\n",
+			append = T, file = doc_name)
+			render( doc_name, "html_document" )
+	
 			if(class(out) != "try-error"){
-				z<-print(out)
-				report <- mark_nmix_report(input, z )
+			
+				#send.mail(from = "popr.results@gmail.com",
+				#	to = input$nmix_email,
+				#	subject = "PopR: N-mixture results",
+				#	body = "c:/temp/nmixReport.html",
+				#	html= TRUE,
+				#	smtp = list(host.name = "smtp.gmail.com", port = 465, user.name = "popr.results", passwd = "MDueleer!", ssl = TRUE),
+				#	authenticate = TRUE,
+				#	send = TRUE)
+			
+				send.mail(from = "PopR.results@cfc.umt.edu",
+                   to = input$nmix_email,
+                   subject="PopR: N-mixture results",
+                   body = "nmixReport.html",
+				   html= TRUE,
+                   smtp = list(host.name = "smtp.umt.edu", port = 25),
+                   authenticate = FALSE, 
+                   send = TRUE)
+				   		
+			
+			#	z<-print(out)
+			#	report <- mark_nmix_report(input, z )
 	#		#	body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(z$summary, name="out") )
-				body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(report, name="nmix_report.html") )
-				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+			#	body<-list(paste("N-mixture model results from ", out$year[1], "to", out$year[2], "\n", z$summary), mime_part(report, name="nmix_report.html") )
+			#	sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
 				#send.mail( from="paul.lukacs@umontana.edu", to=input$nmix_email, subject="PopR N-mixture Results", body=body[[1]] ) 
 	#			sendmail( "paul.lukacs@umontana.edu", "james.nowak@mso.umt.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
 			} else {
-				body<-list("N-mixture model model failed!" )
-				sendmail( "paul.lukacs@umontana.edu", input$nmix_email, "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 
+				send.mail(from = "popr.results@gmail.com",
+					to = c("paul.lukacs@gmail.com"),
+					subject = "PopR: N-mixture results",
+					body = paste("Sorry, unfortunately the analysis failed.", out),
+					html= TRUE,
+					smtp = list(host.name = "smtp.gmail.com", port = 465, user.name = "popr.results", passwd = "MDueleer!", ssl = TRUE),
+					authenticate = TRUE,
+					send = TRUE) 
 			}
 			return(out)
 		}

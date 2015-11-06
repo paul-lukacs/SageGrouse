@@ -78,9 +78,12 @@ setwd("C:/Users/paul.lukacs/Documents/GitHub/SageGrouse" )
 			sdtot <- out$BUGSoutput$sd$totalN
 			p <- out$BUGSoutput$mean$p0
 			sdp <- out$BUGSoutput$sd$p0
-			outtab <- data.frame( Ntotal=ntot, Nsd=sdtot, p=p, sdp=sdp  )
-			colnames(outtab) <- c("Abundance", "SD(Abundance)", "Detection", "SD(detection)"  )
-			
+			RGN <- out$BUGSoutput$summary[ grep("totalN", rownames(out$BUGSoutput$summary)),"Rhat"]
+			RGp <- out$BUGSoutput$summary[ grep("p0", rownames(out$BUGSoutput$summary)),"Rhat"]
+			outtab <- data.frame( year=c(input$nmix_year[1]:input$nmix_year[2]),Ntotal=ntot, Nsd=sdtot, rgn=RGN, 
+						p=p, sdp=sdp, rgp=RGp  )
+			colnames(outtab) <- c("Year", "Abundance", "SD(Abundance)", "R-hat(N)", "Detection", "SD(detection)", "R-hat (p)"  )
+			rownames(outtab) <- NULL
 			
 			
 			setwd( "c:\\temp" )
@@ -108,13 +111,29 @@ setwd("C:/Users/paul.lukacs/Documents/GitHub/SageGrouse" )
 		
 			cat("\n\n\n####Population Size\n\n",
 			"```{r, echo = FALSE, results='asis'}\n\n",
-			"\n\nkable(print(outtab), align = 'c')\n\n",
+			"\n\nkable(outtab, align = 'c', digits=c(0,0,0,3,3,3,3))\n\n",
 			"```",
 			"\n\n-----\n\n",
 			append = T, file = doc_name)
 			render( doc_name, "html_document" )
 				############## markdown #############################
-					
+			
+		send.mail(from = "popr.results@gmail.com",
+          to = c("paul.lukacs@gmail.com"),
+          subject = "PopR: N-mixture results",
+          body = "nmixReport.html",
+          smtp = list(host.name = "aspmx.l.google.com", port = 25),
+          authenticate = FALSE,
+          send = TRUE)
+		  
+		  send.mail(from = "popr.results@gmail.com",
+           to = c("joshnwk@yahoo.com"),
+          subject = "PopR: N-mixture results",
+          body = "c:/temp/nmixReport.html",
+		  html= TRUE,
+          smtp = list(host.name = "smtp.gmail.com", port = 465, user.name = "popr.results", passwd = "MDueleer!", ssl = TRUE),
+          authenticate = TRUE,
+          send = TRUE)
 					
 			body=list("Crushing it!", mime_part(z$summary)
 			sendmail( from, "paul.lukacs@umontana.edu", "PopR N-mixture Results", body , control=list(smtpServer="messaging.umt.edu")) 

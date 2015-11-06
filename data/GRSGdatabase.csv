@@ -1,0 +1,14 @@
+ID,Year,Species,DAU,YFratio,CI90,SEYFratio,MFratio,Field9,SEMFratio,YoungSurvival,SEYoungSurvival,FemaleSurvival,SEFemaleSurvival,PopulationSize,Field16,SEPopulationSize,MaleHarvest,FemaleHarvest,YoungHarvest,SpeciesGroupID,speciesID,ManagementZone,Population,State,Statename,StateID
+162,2002,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,24719,NA,645.4972244,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+163,2003,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,27820,NA,620.1736729,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+164,2004,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,24241,NA,597.6143047,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+165,2005,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,24073,NA,512.989176,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+166,2006,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,30286,NA,690.0655593,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+167,2007,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,26904,NA,542.3261445,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+168,2008,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,19159,NA,422.5771274,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+169,2009,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,19557,NA,415.2273993,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+170,2010,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,18665,NA,398.4095364,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+171,2011,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,16525,NA,404.8881651,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+172,2012,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,16880,NA,404.8881651,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+173,2013,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,12467,NA,288.6751346,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4
+174,2014,SG,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,11341,NA,319.4382825,NA,NA,NA,NA,NA,Management Zone I,Phillips County,Montana,MT,4

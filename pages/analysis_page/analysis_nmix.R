@@ -223,66 +223,66 @@ fixedPage(
              hr(),
              tags$div(dataTableOutput("nmix_raw"), 
                       style = "padding-bottom:200px")       
-    , icon = icon("folder-open"), id = "nmix_raw"),  #  tabPanel Raw Data
+    , icon = icon("folder-open"), id = "nmix_raw") #,  #  tabPanel Raw Data
     
-    tabPanel("Plots",
-      hr(),
-      h4("Sightability"),
-      plotOutput("nmix_plot_dem", height = "350px"), 
-      plotOutput("nmix_plot_total", height = "350px"),       
-      tags$div(h6("Black dots represent field observations while blue dots are 
-                  the estimated abundances with 95% confidence intervals."),
-               style = "padding-bottom:200px")
-    ,  icon = icon("bar-chart-o"), id = "nmix_plots"
-    ),  #  tabPanel, sight plot output
+#    tabPanel("Plots",
+#      hr(),
+#      h4("Sightability"),
+#      plotOutput("nmix_plot_dem", height = "350px"), 
+#      plotOutput("nmix_plot_total", height = "350px"),       
+#      tags$div(h6("Black dots represent field observations while blue dots are 
+#                  the estimated abundances with 95% confidence intervals."),
+#               style = "padding-bottom:200px")
+#    ,  icon = icon("bar-chart-o"), id = "nmix_plots"
+ #   ),  #  tabPanel, sight plot output
      
-    tabPanel("Table",
-      hr(),
-      h4("Activity Observations"),
-      tags$div(dataTableOutput("nmix_table_cov1"),
-               style = "width:200px;
-                        margin: 0 auto"),
-      hr(),
-      h4("Vegetation Observations"),
-      tags$div(dataTableOutput("nmix_table_cov2"),
-               style = "width:200px;
-                        margin: 0 auto"),
-      hr(),
-      h4("Snow Observations"),
-      tags$div(dataTableOutput("nmix_table_cov3"),
-               style = "width:200px;
-                        margin: 0 auto"),
-      hr(),
-      h4("Group Size Observations"),
-      tags$div(dataTableOutput("nmix_table_cov4"),
-               style = "width:200px;
-                        margin: 0 auto;
-                        padding-right:15px"),
-      hr(),
-      h4("Calculated Detection Probabilities"),
-      tags$div(dataTableOutput("nmix_psummary"),
-               style = "width:200px;
-                        margin: 0 auto"),
-      hr(),
-      h4("Sightability Estimates"),
-      fluidRow(tags$div(dataTableOutput("nmix_est"), 
-                        style = "padding-bottom:200px;
-                                 padding-left:15px;
-                                 width:500px;
-                                 margin: 0 auto"))
-      , icon = icon("table"), id = "nmix_table"
-    ),  #  tabPanel, sightival tabular output
-    tabPanel("Report",
-      hr(),
-      wellPanel(
-        radioButtons("nmix_reportformat", "Download Format", 
-                     c("HTML", "Word")),
-        downloadButton("nmix_downloadReport", label = "Download")
-      ),
-      uiOutput("nmix_report"),
-      icon = icon("file-o"),
-      id = "nmix_report"
-    )
+#    tabPanel("Table",
+#      hr(),
+#      h4("Activity Observations"),
+#      tags$div(dataTableOutput("nmix_table_cov1"),
+#               style = "width:200px;
+#                        margin: 0 auto"),
+#      hr(),
+#      h4("Vegetation Observations"),
+#      tags$div(dataTableOutput("nmix_table_cov2"),
+#               style = "width:200px;
+#                        margin: 0 auto"),
+#      hr(),
+#      h4("Snow Observations"),
+#      tags$div(dataTableOutput("nmix_table_cov3"),
+#               style = "width:200px;
+#                        margin: 0 auto"),
+#      hr(),
+#      h4("Group Size Observations"),
+#      tags$div(dataTableOutput("nmix_table_cov4"),
+#               style = "width:200px;
+#                        margin: 0 auto;
+#                        padding-right:15px"),
+#      hr(),
+#      h4("Calculated Detection Probabilities"),
+#      tags$div(dataTableOutput("nmix_psummary"),
+#               style = "width:200px;
+#                        margin: 0 auto"),
+#     hr(),
+#      h4("Sightability Estimates"),
+#      fluidRow(tags$div(dataTableOutput("nmix_est"), 
+#                        style = "padding-bottom:200px;
+#                                 padding-left:15px;
+#                                 width:500px;
+#                                 margin: 0 auto"))
+#      , icon = icon("table"), id = "nmix_table"
+#    ),  #  tabPanel, sightival tabular output
+#    tabPanel("Report",
+#      hr(),
+#      wellPanel(
+#        radioButtons("nmix_reportformat", "Download Format", 
+#                     c("HTML", "Word")),
+#        downloadButton("nmix_downloadReport", label = "Download")
+#     ),
+#      uiOutput("nmix_report"),
+#      icon = icon("file-o"),
+#      id = "nmix_report"
+#    )
   , type= "pills"
   )  #  tabsetPanel
  )  #  tabPanel sightability

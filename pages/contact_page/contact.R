@@ -16,14 +16,14 @@
                                width:351px;
                       float:right"))), 
                   "PopR"),
-        hr(style = "background:darkblue;
+        hr(style = "background:#6A7332;
            border:0;
            height:2px;
            width:100%"),
         br(),      
         includeHTML("www/issue.html"),
         br(),
-        hr(style = "background:darkblue;
+        hr(style = "background:#6A7332;
            border:0;
            height:2px;
            width:100%"),
