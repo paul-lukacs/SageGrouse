@@ -19,7 +19,7 @@
 				
 		#  Define YAML header
 		cat("---", 
-			"\ntitle: 'Idaho Department of Fish and Game'", 
+			"\ntitle: 'Sage-Grouse'", 
 			"\nauthor: 'PopR Population Model Report'",
 			paste("\ndate:", format(Sys.time(), "%b %d, %Y")), 
 #			paste("\noutput:\n", 'html_document'),
@@ -57,21 +57,21 @@
 			"\n\n-----\n\n",
 			append = T, file = doc_name)
 			
-		#  Insert table of sex and age ratios
-		cat("\n\n\n####Sex & Age Ratios\n\n",
-			"```{r, echo = FALSE, results='asis'}\n\n",
-			"\n\nkable(mark_ipm_rat_tbl(out), align = 'c')\n\n",
-			"```",
-			"\n\n-----\n\n",
-			append = T, file = doc_name)		
+#		#  Insert table of sex and age ratios
+#		cat("\n\n\n####Sex & Age Ratios\n\n",
+#			"```{r, echo = FALSE, results='asis'}\n\n",
+#			"\n\nkable(mark_ipm_rat_tbl(out), align = 'c')\n\n",
+#			"```",
+#			"\n\n-----\n\n",
+#			append = T, file = doc_name)		
 
-		#  Insert table of sex and age ratios
-		cat("\n\n\n####Survival\n\n",
-			"```{r, echo = FALSE, results='asis'}\n\n",
-			"\n\nkable(mark_ipm_surv_tbl(out), align = 'c')\n\n",
-			"```",
-			"\n\n-----\n\n",
-			append = T, file = doc_name)	
+#		#  Insert table of sex and age ratios
+#		cat("\n\n\n####Survival\n\n",
+#			"```{r, echo = FALSE, results='asis'}\n\n",
+#			"\n\nkable(mark_ipm_surv_tbl(out), align = 'c')\n\n",
+#			"```",
+#			"\n\n-----\n\n",
+#			append = T, file = doc_name)	
 		incProgress(0.1, message = "Preparing Data", session = session)	
 		#  Plots 
 		#  N
@@ -107,16 +107,16 @@
 			"\n\n-----\n\n",
 			append = T, file = doc_name)
 		#  Ratios
-		cat("\n\n\n####Sex & Age Ratios\n\n",
-			"```{r, echo = FALSE, results='asis'}\n\n",
-			"\n\nmark_plot_rat(summ_ipm(out), dat)\n\n",
-			"```",
-			"\n\nFigure 4. Model predicted ratios of young to adult females (blue)
-			and adult males to adult females(red).  Solid lines	represents the median 
-			estimate while shaded area depcit 95% prediction intervals for
-			each series.  Dots represent the mean of field based estimates.",
-			"\n\n-----\n\n",
-			append = T, file = doc_name)
+#		cat("\n\n\n####Sex & Age Ratios\n\n",
+#			"```{r, echo = FALSE, results='asis'}\n\n",
+#			"\n\nmark_plot_rat(summ_ipm(out), dat)\n\n",
+#			"```",
+#			"\n\nFigure 4. Model predicted ratios of young to adult females (blue)
+#			and adult males to adult females(red).  Solid lines	represents the median 
+#			estimate while shaded area depcit 95% prediction intervals for
+#			each series.  Dots represent the mean of field based estimates.",
+#			"\n\n-----\n\n",
+#			append = T, file = doc_name)
 		incProgress(0.1, message = "Data ready, compiling report...", 
 					session = session)
 		#

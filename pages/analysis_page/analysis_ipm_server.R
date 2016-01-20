@@ -2,6 +2,24 @@
     #  Josh Nowak
     #  01/2015
 ###############################################################################
+	output$contents <- renderTable({
+    
+    # input$file1 will be NULL initially. After the user selects
+    # and uploads a file, it will be a data frame with 'name',
+    # 'size', 'type', and 'datapath' columns. The 'datapath'
+    # column will contain the local filenames where the data can
+    # be found.
+
+    inFile <- input$ipmDataFile
+
+    if (is.null(inFile))
+      return(NULL)
+    
+	read.csv(inFile$datapath, header=TRUE, sep=",",  quote="")
+   # read.csv(inFile$datapath, header=input$header, sep=input$sep, 
+   #				 quote=input$quote)
+	})
+
     #  Populate header with large text holding the species followed by IPM
     output$ipmsp <- renderText({
       if(input$dbname == "" | is.null(input$dbname))
@@ -9,8 +27,15 @@
   #    load("grouseStates.RData")
       updateSelectInput(session, "state", 
 		    choices = levels(grouseStates$StateNames),
-		    selected = "Montana")
-        paste(input$critter, "IPM")
+		    selected = "")
+	  updateSelectInput(session, "mzone", 
+		    choices = levels(grouseZones$ZoneNames),
+		    selected = "")
+	  updateSelectInput(session, "popn", 
+		    choices = levels(grousePopulations$popName),
+		    selected = "")
+			
+        paste(input$critter, "Integrated Population Model")
     })
     
     #  Header subtitle, display database name
@@ -187,8 +212,8 @@
       if (input$fitgo == 0)
         return()
       
-      paste("Mean Growth Rate: ", round(ipmrun$ipm$BUGS$mean$geoLambda, 2), 
-            " (SD = ", round(ipmrun$ipm$BUGS$sd$geoLambda, 3), ")", sep = "") 
+      #paste("Mean Growth Rate: ", round(ipmrun$ipm$BUGS$mean$geoLambda, 2), 
+      #      " (SD = ", round(ipmrun$ipm$BUGS$sd$geoLambda, 3), ")", sep = "") 
     })
     #  N's
     output$ipmplotN <- renderPlot({

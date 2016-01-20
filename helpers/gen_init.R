@@ -4,9 +4,9 @@
 ################################################################################
     gen_init <- function(x, model_name){
         Ny <- Nf <- Nm <- fS <- mS <- NULL
-        Ny[1] <- x$muy1
-        Nf[1] <- x$muf1
-        Nm[1] <- x$mum1
+      #  Ny[1] <- x$muy1
+      #  Nf[1] <- x$muf1
+      #  Nm[1] <- x$mum1
         fS <- runif(1, quantile(x$fSdat, 0.4), quantile(x$fSdat, 0.6))
         mS <- fS
 		jS <- runif(1, quantile(x$jSdat, 0.4), quantile(x$jSdat, 0.6))
@@ -53,24 +53,26 @@
 			#			"muR" = R,
 			#			"mujS" = qlogis(jS), 
 			#			"mumS" = qlogis(mS))
-			Iy <- rep(0.89, nyear)
-			Ia <- rep(0.96, nyear)
-			Ca <- rep(4.1, nyear)
-			Cy <- rep(3.78,nyear)
-			Sn <- rep(0.44,nyear)
-			HCH <- rep(0.92,nyear)
-			Sc<- rep(0.41,nyear)
-			Sj<- rep(0.75,nyear)
-			Syf<- rep(0.65,nyear)
-			Saf<- rep(0.58,nyear)
-			Sym<- rep(0.59,nyear)
-			Sam<- rep(0.56,nyear)
-			ym1 <- x$counts[1]*(1/3)
-			yf1 <- ym1*1.6
-			am1 <- x$counts[1]*(2/3)
-			af1 <- am1*1.6
+			Iy <- rep(0.89, x$nyr)
+			Ia <- rep(0.96, x$nyr)
+			Ca <- rep(4.1, x$nyr)
+			Cy <- rep(3.78,x$nyr)
+			Sn <- rep(0.44,x$nyr)
+			HCH <- rep(0.92,x$nyr)
+			Sc<- rep(0.41,x$nyr)
+			Sj<- rep(0.75,x$nyr)
+			Syf<- rep(0.65,x$nyr)
+			Saf<- rep(0.58,x$nyr)
+			Sym<- rep(0.59,x$nyr)
+			Sam<- rep(0.56,x$nyr)
+			
+			
+		#	ym1 <- x$counts[1]*(1/3)
+		#	yf1 <- ym1*1.6
+		#	am1 <- x$counts[1]*(2/3)
+		#	af1 <- am1*1.6
 		
-			out <- list(Iy=Iy,Ia=Ia,Ca=Ca,Cy=Cy,Sn=Sn,HCH=HCH,Sc=Sc,Sj=Sj,Saf=Saf,Syf=Syf,Sam=Sam,Sym=Sym, ym1=ym1, yf1=yf1,am1=am1,af1=af1)
+			out <- list(Iy=Iy,Ia=Ia,Ca=Ca,Cy=Cy,Sn=Sn,HCH=HCH,Sc=Sc,Sj=Sj,Saf=Saf,Syf=Syf,Sam=Sam,Sym=Sym) #, ym1=ym1, yf1=yf1,am1=am1,af1=af1)
 		}else{
 		    out <- list("mufS" = qlogis(fS), 
 						"muR" = R, 

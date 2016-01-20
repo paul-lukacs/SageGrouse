@@ -15,18 +15,18 @@
                                  width:351px;
                                  float:right"))), 
                   "PopR"),
-      hr(style = "background:darkblue;
+      hr(style = "background:#6A7332;
          border:0;
          height:2px;
          width:100%"),
       
-      h2("Welcome to PopR!", style = "color:darkblue;
+      h2("Welcome to PopR!", style = "color:#6A7332;
                                       text-align:center"),
       br(),      
       includeText("www/home.txt"),
       br(),
       div(class = "login", uiOutput("uiLogin")),
-      hr(style = "background:darkblue;
+      hr(style = "background:#6A7332;
          border:0;
          height:2px;
          width:100%"),

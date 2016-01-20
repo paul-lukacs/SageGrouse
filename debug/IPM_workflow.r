@@ -32,12 +32,12 @@
 	input <- list( "critter"="Sage Grouse",
 					"dbname"=DbName,
 					"state"="Montana",
-					"year"=c(2002,2015),
+					"year"=c(2002,2014),
 					"recruitMod"="Time Varying",
 					"juvSmod"="Time Varying",
 					"adultSmod"="Time Varying",
-					"ipmburn"=1000,
-					"ipmiter"=10000,
+					"ipmburn"=1,
+					"ipmiter"=100,
 					"ipmthin"=1,
 					"autoup"=FALSE,
 					fitgo=1
@@ -52,9 +52,9 @@
 				#  Initial Values 
 				inits <- replicate(3, get_init(dat, input, model_name), 
 									simplify = F)
-				dat$muy1 <- inits[[1]]$Ny[1]
-				dat$muf1 <- inits[[1]]$Nf[1]
-				dat$mum1 <- inits[[1]]$Nm[1]
+			#	dat$muy1 <- inits[[1]]$Ny[1]
+			#	dat$muf1 <- inits[[1]]$Nf[1]
+			#	dat$mum1 <- inits[[1]]$Nm[1]
 				#  Parameters to monitor
 				parms <- get_parms(input)
 				incProgress(0.2, message = "Data ready, running model...")

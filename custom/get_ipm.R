@@ -33,13 +33,13 @@
 			if(is.na(meanr)){
 				meanr <- 0.61
 			}
-			meanjs <- mean(x$YoungSurvival, na.rm = T) 
+			meanjs <- qlogis(mean(x$YoungSurvival, na.rm = T) )
 			if(is.na(meanjs)){
-				meanjs <- 0.56
+				meanjs <- qlogis(0.56)
 			}
-			meanfs <- mean(x$FemaleSurvival, na.rm = T) 
+			meanfs <- qlogis( mean(x$FemaleSurvival, na.rm = T) )
 			if(is.na(meanfs)){
-				meanfs <- 0.85
+				meanfs <- qlogis( 0.85 )
 			}
 			
 			#  Time varying mean calculations
@@ -190,9 +190,9 @@
 				#  Initial Values 
 				inits <- replicate(3, get_init(dat, input, model_name), 
 									simplify = F)
-				dat$muy1 <- inits[[1]]$Ny[1]
-				dat$muf1 <- inits[[1]]$Nf[1]
-				dat$mum1 <- inits[[1]]$Nm[1]
+			#	dat$muy1 <- inits[[1]]$Ny[1]
+			#	dat$muf1 <- inits[[1]]$Nf[1]
+			#	dat$mum1 <- inits[[1]]$Nm[1]
 				#  Parameters to monitor
 				parms <- get_parms(input)
 				incProgress(0.2, message = "Data ready, running model...")

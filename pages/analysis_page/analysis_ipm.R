@@ -28,16 +28,50 @@ fixedPage(
                            type = "select")
             )
           )
-        )
+        ),
+		################ file upload code
+		fluidRow(
+			column(12,
+				fileInput('ipmDataFile', 'Choose CSV File in place of database',
+					accept=c('text/csv', 
+						 'text/comma-separated-values,text/plain', 
+						 '.csv')
+					)
+			)
+		)
+		#################
       ),
       h4("Define Space & Time"),
       wellPanel(
         fluidRow(
           column(5,
             tags$div(title = "Select a state to analyze", 
-              selectizeInput("state", "Analysis State", 
+              selectizeInput("state", "State", 
                 choices = "",
-                selected = "Montana",
+                selected = "",
+                options = list(dropdownParent = "body",
+                  maxItems = 1))
+            )
+          ),
+          column(7,
+            tags$div(title = "Select a management zone to analyze", 
+              selectizeInput("mzone", "Management Zone", 
+                choices = "",
+                selected = "",
+                options = list(dropdownParent = "body",
+                  maxItems = 1))
+            )
+          )
+        )
+      ),
+#	  h4("Define Space & Time"),
+      wellPanel(
+        fluidRow(
+          column(5,
+            tags$div(title = "Select a population to analyze", 
+              selectizeInput("popn", "Population", 
+                choices = "",
+				selected = "",
                 options = list(dropdownParent = "body",
                   maxItems = 1))
             )
@@ -51,7 +85,7 @@ fixedPage(
                                       as.POSIXlt(Sys.time())$year + 2), 
                           step = 1,
                           ticks = TRUE,
-            #              sep = "",
+                          sep = "",
                           width = "100%")
             )
           )
@@ -64,22 +98,21 @@ fixedPage(
           column(4, 
             tags$div(title = "Choose how recruitment varies or hold it constant",
               select2Input("recruitMod", "Recruitment",
-                              choices = c("Constant", 
-                                          "Time Varying"),
+                              choices = c("Time Varying", "Constant"),
                            type = "select")
             )
           ),
           column(4,
             tags$div(title = "Choose how juvenile survival varies or hold it constant",
               select2Input("juvSmod", "Juvenile Survival",
-                           choices = list("Constant", "Time Varying"),
+                           choices = list("Time Varying", "Constant"),
                            type = "select")
             )
           ),
           column(4,
             tags$div(title = "Choose how adult survival varies or hold it constant",
               select2Input("adultSmod", "Adult Survival",
-                           choices = list("Constant", "Time Varying"),
+                           choices = list("Time Varying", "Constant"),
                            type = "select")
             )
           )
@@ -187,17 +220,17 @@ fixedPage(
       hr(style = "background:gray;
          border:0;
          height:2px;
-         width:100%"),
-      h4("Sex & Age Ratios"),
-      plotOutput("ipmplotR", height = "350px"),
-      tags$div(
-        h6(HTML(paste(tags$span(style = "color:red", "- Male/100 Females"), 
-                      tags$span(style = "color:blue", "- Juveniles/100 Females"), 
-                      sep = " ")))
-      ),
-      checkboxInput("ipm_rfd", label = "Show field data", value = FALSE),
-      tags$div(checkboxInput("ipm_rserr", label = "Add CI", value = FALSE), 
-                style = "padding-bottom:200px")   
+         width:100%") #,
+   #   h4("Sex & Age Ratios"),
+   #   plotOutput("ipmplotR", height = "350px"),
+   #   tags$div(
+   #     h6(HTML(paste(tags$span(style = "color:red", "- Male/100 Females"), 
+   #                   tags$span(style = "color:blue", "- Juveniles/100 Females"), 
+   #                   sep = " ")))
+   #   ),
+   #   checkboxInput("ipm_rfd", label = "Show field data", value = FALSE),
+   #   tags$div(checkboxInput("ipm_rserr", label = "Add CI", value = FALSE), 
+   #            style = "padding-bottom:200px")   
       
     , icon = icon("bar-chart-o"), id = "ipm_plottab"
     ),  #  tabPanel, IPM plot output
@@ -206,8 +239,8 @@ fixedPage(
       hr(),
       h4("Population Size"),
       dataTableOutput("ipmtable1"),
-      h4("Sex & Age Ratios"),
-      dataTableOutput("ipmtable2"),
+    #  h4("Sex & Age Ratios"),
+    #  dataTableOutput("ipmtable2"),
       h4("Survival"),
       tags$div(dataTableOutput("ipmtable3"), 
                style = "padding-bottom:200px"),      

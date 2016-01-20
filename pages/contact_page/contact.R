@@ -8,22 +8,22 @@
       fixedPage(
         headerPanel(a(a(href = "http://www.wafwa.org/", 
                   img(src = "logo.png", 
-                      style = "height:100px;
-                      width:133px")),
+                      style = "height:165px;
+                                 width:104px")),
                 a(href = "http://www.cfc.umt.edu/research/lukacslab/",
                   img(src = "umt.png", 
-                      style = "height:100px;
-                      width:213px;
+                      style = "height:165px;
+                               width:351px;
                       float:right"))), 
                   "PopR"),
-        hr(style = "background:darkblue;
+        hr(style = "background:#6A7332;
            border:0;
            height:2px;
            width:100%"),
         br(),      
         includeHTML("www/issue.html"),
         br(),
-        hr(style = "background:darkblue;
+        hr(style = "background:#6A7332;
            border:0;
            height:2px;
            width:100%"),

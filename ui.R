@@ -25,8 +25,9 @@ shinyUI(
     
     #  Analysis Page
     source("pages/analysis_page/analysis_ipm.R", local = T)$value,
-    source("pages/analysis_page/analysis_sight.R", local = T)$value,
-    source("pages/analysis_page/analysis_surv.R", local = T)$value,
+#    source("pages/analysis_page/analysis_sight.R", local = T)$value,
+#    source("pages/analysis_page/analysis_surv.R", local = T)$value,
+	source("pages/analysis_page/analysis_nmix.R", local = T)$value,
 
     tabPanel("About",
         source("pages/contact_page/contact.R", local = T)$value    
